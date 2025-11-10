@@ -3,12 +3,10 @@ import './BalanceDisplay.css';
 
 interface BalanceDisplayProps {
   balance: number;
-  promoBalance?: number;
 }
 
 export const BalanceDisplay: React.FC<BalanceDisplayProps> = ({
   balance,
-  promoBalance,
 }) => {
   const formatBalance = (amount: number): string => {
     return new Intl.NumberFormat('ru-RU', {
