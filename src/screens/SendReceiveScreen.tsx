@@ -134,7 +134,10 @@ export const SendReceiveScreen: React.FC = () => {
         </button>
 
         <div className="history-section">
-          <TransactionHistory transactions={filteredTransactions} />
+          <TransactionHistory 
+            transactions={filteredTransactions} 
+            title={activeTab === 'send' ? 'История отправки' : 'История получения'}
+          />
         </div>
       </div>
 

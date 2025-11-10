@@ -12,11 +12,13 @@ import './TransactionHistory.css';
 interface TransactionHistoryProps {
   transactions: Transaction[];
   onTransactionPress?: (transaction: Transaction) => void;
+  title?: string;
 }
 
 export const TransactionHistory: React.FC<TransactionHistoryProps> = ({
   transactions,
   onTransactionPress,
+  title,
 }) => {
   const formatDate = (date: Date): string => {
     return new Intl.DateTimeFormat('ru-RU', {
@@ -67,7 +69,7 @@ export const TransactionHistory: React.FC<TransactionHistoryProps> = ({
 
   return (
     <div className="transaction-history">
-      <h3 className="transaction-history-title">История</h3>
+      <h3 className="transaction-history-title">{title || 'История'}</h3>
       {transactions.map((transaction) => (
         <div
           key={transaction.id}
