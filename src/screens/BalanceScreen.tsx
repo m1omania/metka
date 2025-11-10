@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Wallet, Transaction } from '../types';
 import { BalanceDisplay } from '../components/BalanceDisplay';
 import { WalletAddress } from '../components/WalletAddress';
 import { TransactionHistory } from '../components/TransactionHistory';
+import { LinkShareModal } from '../components/LinkShareModal';
 import { WalletService } from '../services/walletService';
+import { generateRequestLink } from '../utils/linkGenerator';
 import './BalanceScreen.css';
 
 export const BalanceScreen: React.FC = () => {
+  const navigate = useNavigate();
   const [wallet, setWallet] = useState<Wallet | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [showLinkModal, setShowLinkModal] = useState(false);
+  const [linkUrl, setLinkUrl] = useState<string>('');
 
   useEffect(() => {
     loadData();
@@ -19,6 +25,32 @@ export const BalanceScreen: React.FC = () => {
     const transactionsData = await WalletService.getTransactions();
     setWallet(walletData);
     setTransactions(transactionsData);
+  };
+
+  const handleSend = () => {
+    navigate('/send');
+  };
+
+  const handleReceive = () => {
+    if (!wallet) return;
+    alert('Показ адреса кошелька для получения средств');
+  };
+
+  const handleQR = () => {
+    if (!wallet) return;
+    const link = generateRequestLink();
+    setLinkUrl(link.url);
+    setShowLinkModal(true);
+  };
+
+  const handleCopy = async () => {
+    if (!wallet) return;
+    try {
+      await navigator.clipboard.writeText(wallet.address);
+      alert('Адрес кошелька скопирован в буфер обмена');
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
   };
 
   if (!wallet) {
@@ -33,6 +65,21 @@ export const BalanceScreen: React.FC = () => {
     <div className="balance-screen">
       <div className="balance-screen-content">
         <BalanceDisplay balance={wallet.balance} promoBalance={wallet.promoBalance} />
+
+        <div className="balance-actions">
+          <button className="balance-action-button send-button" onClick={handleSend}>
+            Отправить
+          </button>
+          <button className="balance-action-button receive-button" onClick={handleReceive}>
+            Получить
+          </button>
+          <button className="balance-action-button qr-button" onClick={handleQR}>
+            QR
+          </button>
+          <button className="balance-action-button copy-button" onClick={handleCopy}>
+            Скопировать
+          </button>
+        </div>
       </div>
 
       <div className="balance-screen-bottom">
@@ -70,6 +117,12 @@ export const BalanceScreen: React.FC = () => {
 
         <TransactionHistory transactions={transactions} />
       </div>
+
+      <LinkShareModal
+        visible={showLinkModal}
+        url={linkUrl}
+        onClose={() => setShowLinkModal(false)}
+      />
     </div>
   );
 };
