@@ -69,7 +69,7 @@ export const BalanceScreen: React.FC = () => {
     <div className="balance-screen">
       <div className="balance-screen-content">
         <div className="balance-header">
-          <button className="header-avatar-button" onClick={() => alert('Профиль')}>
+          <button className="header-avatar-button" onClick={() => navigate('/settings')}>
             <div className="avatar-circle">{userInitial}</div>
           </button>
           <button className="header-icon-button" onClick={handleQR}>

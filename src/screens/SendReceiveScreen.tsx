@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { QrCodeIcon } from '@heroicons/react/24/outline';
 import { Transaction } from '../types';
 import { DigitalKeyboard } from '../components/DigitalKeyboard';
@@ -12,6 +12,7 @@ import './SendReceiveScreen.css';
 type TabType = 'send' | 'receive';
 
 export const SendReceiveScreen: React.FC = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const tabParam = searchParams.get('tab') as TabType | null;
   const [activeTab, setActiveTab] = useState<TabType>(tabParam === 'receive' ? 'receive' : 'send');
@@ -90,7 +91,7 @@ export const SendReceiveScreen: React.FC = () => {
   return (
     <div className="send-receive-screen">
       <div className="send-receive-header">
-        <button className="header-avatar-button" onClick={() => alert('Профиль')}>
+        <button className="header-avatar-button" onClick={() => navigate('/settings')}>
           <div className="avatar-circle">{userInitial}</div>
         </button>
         <div className="tab-container">
