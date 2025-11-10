@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation, Routes, Route } from 'react-router-dom';
+import { CurrencyDollarIcon, PaperAirplaneIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 import { BalanceScreen } from '../screens/BalanceScreen';
 import { SendReceiveScreen } from '../screens/SendReceiveScreen';
 import { SettingsScreen } from '../screens/SettingsScreen';
@@ -22,21 +23,21 @@ export const AppNavigator: React.FC = () => {
           to="/"
           className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}
         >
-          <span className="nav-icon">💰</span>
+          <CurrencyDollarIcon className="nav-icon" />
           <span className="nav-label">Баланс</span>
         </Link>
         <Link
           to="/send"
           className={`nav-item ${location.pathname === '/send' ? 'active' : ''}`}
         >
-          <span className="nav-icon">📤</span>
+          <PaperAirplaneIcon className="nav-icon" />
           <span className="nav-label">Отправить</span>
         </Link>
         <Link
           to="/settings"
           className={`nav-item ${location.pathname === '/settings' ? 'active' : ''}`}
         >
-          <span className="nav-icon">⚙️</span>
+          <Cog6ToothIcon className="nav-icon" />
           <span className="nav-label">Настройки</span>
         </Link>
       </nav>

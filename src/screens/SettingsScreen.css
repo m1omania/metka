@@ -50,8 +50,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
   margin-right: 16px;
+}
+
+.profile-icon-svg {
+  width: 30px;
+  height: 30px;
+  color: #ffffff;
 }
 
 .profile-info {
@@ -144,8 +149,21 @@
 }
 
 .security-status {
-  font-size: 20px;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.security-status-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.status-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .switch {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { UserIcon, CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { WalletService } from '../services/walletService';
 import './SettingsScreen.css';
 
@@ -50,7 +51,9 @@ export const SettingsScreen: React.FC = () => {
         <div className="section">
           <div className="section-title">Личный кабинет</div>
           <div className="profile-card">
-            <div className="profile-icon">👤</div>
+            <div className="profile-icon">
+              <UserIcon className="profile-icon-svg" />
+            </div>
             <div className="profile-info">
               <div className="profile-email">{user.email}</div>
               <div className="profile-label">Email</div>
@@ -78,7 +81,15 @@ export const SettingsScreen: React.FC = () => {
                 className="info-value"
                 style={{ color: user.hasBackup ? '#34C759' : '#FF3B30' }}
               >
-                {user.hasBackup ? '✓ Сохранен' : '✗ Не сохранен'}
+                {user.hasBackup ? (
+                  <>
+                    <CheckCircleIcon className="status-icon" /> Сохранен
+                  </>
+                ) : (
+                  <>
+                    <XCircleIcon className="status-icon" /> Не сохранен
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -114,7 +125,11 @@ export const SettingsScreen: React.FC = () => {
                 className="security-status"
                 style={{ color: user.hasBackup ? '#34C759' : '#FF3B30' }}
               >
-                {user.hasBackup ? '✓' : '✗'}
+                {user.hasBackup ? (
+                  <CheckCircleIcon className="security-status-icon" />
+                ) : (
+                  <XCircleIcon className="security-status-icon" />
+                )}
               </div>
             </div>
           </div>

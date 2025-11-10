@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ClipboardDocumentIcon, CheckIcon } from '@heroicons/react/24/outline';
 import './WalletAddress.css';
 
 interface WalletAddressProps {
@@ -26,7 +27,9 @@ export const WalletAddress: React.FC<WalletAddressProps> = ({ address }) => {
       <div className="wallet-address-label">Адрес кошелька</div>
       <div className="wallet-address-container" onClick={copyToClipboard}>
         <div className="wallet-address-text">{shortAddress}</div>
-        <div className="wallet-address-copy">{copied ? '✓' : '📋'}</div>
+        <div className="wallet-address-copy">
+          {copied ? <CheckIcon className="icon" /> : <ClipboardDocumentIcon className="icon" />}
+        </div>
       </div>
     </div>
   );

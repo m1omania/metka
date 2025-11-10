@@ -33,8 +33,14 @@
 }
 
 .transaction-icon {
-  font-size: 24px;
   margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.transaction-icon-svg {
+  width: 24px;
+  height: 24px;
 }
 
 .transaction-info {
@@ -88,8 +94,15 @@
   padding: 4px;
   background: none;
   border: none;
-  font-size: 20px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.blockchain-icon {
+  width: 20px;
+  height: 20px;
+  color: #007AFF;
 }
 
 .transaction-history-empty {

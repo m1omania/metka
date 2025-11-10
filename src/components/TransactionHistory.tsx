@@ -1,5 +1,12 @@
 import React from 'react';
 import { Transaction } from '../types';
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  ClockIcon,
+  XCircleIcon,
+  LinkIcon,
+} from '@heroicons/react/24/outline';
 import './TransactionHistory.css';
 
 interface TransactionHistoryProps {
@@ -28,10 +35,14 @@ export const TransactionHistory: React.FC<TransactionHistoryProps> = ({
     }).format(amount);
   };
 
-  const getStatusIcon = (status: string, type: string): string => {
-    if (status === 'pending') return '⏳';
-    if (status === 'failed') return '❌';
-    return type === 'incoming' ? '⬇️' : '⬆️';
+  const getStatusIcon = (status: string, type: string) => {
+    if (status === 'pending') return <ClockIcon className="transaction-icon-svg" />;
+    if (status === 'failed') return <XCircleIcon className="transaction-icon-svg" />;
+    return type === 'incoming' ? (
+      <ArrowDownIcon className="transaction-icon-svg" />
+    ) : (
+      <ArrowUpIcon className="transaction-icon-svg" />
+    );
   };
 
   const getStatusColor = (status: string): string => {
@@ -104,7 +115,7 @@ export const TransactionHistory: React.FC<TransactionHistoryProps> = ({
                 handleBlockchainPress(transaction.blockchainLink);
               }}
             >
-              🔗
+              <LinkIcon className="blockchain-icon" />
             </button>
           )}
         </div>
