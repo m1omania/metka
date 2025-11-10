@@ -1,0 +1,30 @@
+.balance-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 48px 0;
+}
+
+.balance-text {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 76px;
+  color: #000000;
+  margin-bottom: 4px;
+}
+
+.currency-text {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #8E8E93;
+  margin-bottom: 8px;
+}
+
+.promo-balance-text {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #8E8E93;
+}
+
