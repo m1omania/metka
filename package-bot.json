@@ -1,0 +1,17 @@
+{
+  "name": "metka-telegram-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot for Metka wallet",
+  "main": "telegram-bot.js",
+  "scripts": {
+    "start": "node telegram-bot.js",
+    "dev": "nodemon telegram-bot.js"
+  },
+  "dependencies": {
+    "telegraf": "^4.15.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
+
