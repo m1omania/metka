@@ -111,19 +111,27 @@
   font-size: 20px;
   font-weight: 600;
   color: #000000;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.deposit-buttons-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .deposit-button {
-  width: 100%;
-  padding: 16px;
+  flex: 1;
+  min-width: 100px;
+  padding: 12px 8px;
   border-radius: 12px;
-  margin-bottom: 8px;
+  margin-bottom: 0;
   background-color: #F5F5F7;
   border: none;
-  font-size: 16px;
+  font-size: 14px;
   color: #8E8E93;
   cursor: not-allowed;
+  text-align: center;
 }
 
 .deposit-button.disabled {
