@@ -6,11 +6,18 @@
   padding-bottom: 80px;
 }
 
+.balance-screen-top {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  z-index: 10;
+  padding: 16px 0;
+  border-bottom: 1px solid #E5E5EA;
+}
+
 .balance-screen-content {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding-top: 16px;
 }
 
 .balance-screen.loading {

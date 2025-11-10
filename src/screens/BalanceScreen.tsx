@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet } from '../types';
+import { Wallet, Transaction } from '../types';
 import { BalanceDisplay } from '../components/BalanceDisplay';
 import { DigitalKeyboard } from '../components/DigitalKeyboard';
+import { WalletAddress } from '../components/WalletAddress';
+import { TransactionHistory } from '../components/TransactionHistory';
 import { LinkShareModal } from '../components/LinkShareModal';
 import { WalletService } from '../services/walletService';
 import { generateRequestLink } from '../utils/linkGenerator';
@@ -9,6 +11,7 @@ import './BalanceScreen.css';
 
 export const BalanceScreen: React.FC = () => {
   const [wallet, setWallet] = useState<Wallet | null>(null);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [amount, setAmount] = useState<string>('');
   const [showLinkModal, setShowLinkModal] = useState(false);
   const [linkUrl, setLinkUrl] = useState<string>('');
@@ -19,7 +22,9 @@ export const BalanceScreen: React.FC = () => {
 
   const loadData = async () => {
     const walletData = await WalletService.getWallet();
+    const transactionsData = await WalletService.getTransactions();
     setWallet(walletData);
+    setTransactions(transactionsData);
   };
 
   const handleKeyPress = (value: string) => {
@@ -69,18 +74,7 @@ export const BalanceScreen: React.FC = () => {
 
   return (
     <div className="balance-screen">
-      <div className="balance-screen-content">
-        <BalanceDisplay balance={wallet.balance} promoBalance={wallet.promoBalance} />
-
-        <div className="input-container">
-          <div className="input-label">Сумма</div>
-          <div className="input-box">
-            <div className="input-text">
-              {amount || '0.00'} <span className="input-currency">USDT</span>
-            </div>
-          </div>
-        </div>
-
+      <div className="balance-screen-top">
         <DigitalKeyboard
           onPress={handleKeyPress}
           onDelete={handleDelete}
@@ -98,7 +92,49 @@ export const BalanceScreen: React.FC = () => {
             Получить
           </button>
         </div>
+      </div>
 
+      <div className="balance-screen-content">
+        <BalanceDisplay balance={wallet.balance} promoBalance={wallet.promoBalance} />
+
+        <div className="input-container">
+          <div className="input-label">Сумма</div>
+          <div className="input-box">
+            <div className="input-text">
+              {amount || '0.00'} <span className="input-currency">USDT</span>
+            </div>
+          </div>
+        </div>
+
+        <WalletAddress address={wallet.address} />
+
+        <div className="deposit-section">
+          <div className="section-title">Пополнение</div>
+          <button className="deposit-button disabled" disabled>
+            Банковская карта
+          </button>
+          <button className="deposit-button disabled" disabled>
+            CoinbasePay
+          </button>
+          <button className="deposit-button disabled" disabled>
+            CryptoWallet
+          </button>
+        </div>
+
+        <div className="withdraw-section">
+          <div className="section-title">Вывод</div>
+          <button className="deposit-button disabled" disabled>
+            Банковская карта
+          </button>
+          <button className="deposit-button disabled" disabled>
+            Подарочная карта
+          </button>
+          <button className="deposit-button disabled" disabled>
+            Криптокошелек
+          </button>
+        </div>
+
+        <TransactionHistory transactions={transactions} />
       </div>
 
       <LinkShareModal
