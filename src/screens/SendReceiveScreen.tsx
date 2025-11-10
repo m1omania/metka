@@ -58,14 +58,16 @@ export const SendReceiveScreen: React.FC = () => {
         <div className="input-section">
           <div className="input-label">Сумма для отправки</div>
           <div className="input-container">
-            <input
-              className="input-field"
-              type="text"
-              value={amount}
-              placeholder="0.00"
-              readOnly
-            />
-            <div className="input-currency">USDT</div>
+            <div className="input-wrapper">
+              <input
+                className="input-field"
+                type="text"
+                value={amount || '0.00'}
+                placeholder="0.00"
+                readOnly
+              />
+              <span className="input-currency">USDT</span>
+            </div>
           </div>
         </div>
 
