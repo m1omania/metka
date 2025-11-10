@@ -2,13 +2,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 48px 0;
+  margin: 24px 0 16px;
 }
 
 .balance-text {
-  font-size: 64px;
+  font-size: 48px;
   font-weight: 800;
-  line-height: 76px;
+  line-height: 56px;
   color: #000000;
   margin-bottom: 4px;
 }
