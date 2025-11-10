@@ -43,14 +43,8 @@ export const BalanceScreen: React.FC = () => {
     setShowLinkModal(true);
   };
 
-  const handleCopy = async () => {
-    if (!wallet) return;
-    try {
-      await navigator.clipboard.writeText(wallet.address);
-      alert('Адрес кошелька скопирован в буфер обмена');
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
+  const handleDeposit = () => {
+    alert('Функция пополнения в разработке');
   };
 
   if (!wallet) {
@@ -76,8 +70,8 @@ export const BalanceScreen: React.FC = () => {
           <button className="balance-action-button qr-button" onClick={handleQR}>
             QR
           </button>
-          <button className="balance-action-button copy-button" onClick={handleCopy}>
-            Скопировать
+          <button className="balance-action-button deposit-button" onClick={handleDeposit}>
+            Пополнить
           </button>
         </div>
       </div>
