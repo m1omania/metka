@@ -4,13 +4,10 @@ import { DigitalKeyboard } from '../components/DigitalKeyboard';
 import { TransactionHistory } from '../components/TransactionHistory';
 import { LinkShareModal } from '../components/LinkShareModal';
 import { WalletService } from '../services/walletService';
-import { generateRequestLink, generateSendLink } from '../utils/linkGenerator';
+import { generateSendLink } from '../utils/linkGenerator';
 import './SendReceiveScreen.css';
 
-type TabType = 'request' | 'send';
-
 export const SendReceiveScreen: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<TabType>('request');
   const [amount, setAmount] = useState<string>('');
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [showLinkModal, setShowLinkModal] = useState(false);
@@ -46,41 +43,20 @@ export const SendReceiveScreen: React.FC = () => {
       return;
     }
 
-    const link =
-      activeTab === 'request'
-        ? generateRequestLink(parseFloat(amount))
-        : generateSendLink(parseFloat(amount));
+    const link = generateSendLink(parseFloat(amount));
     setLinkUrl(link.url);
     setShowLinkModal(true);
     setAmount('');
   };
 
-  const filteredTransactions = transactions.filter((t) =>
-    activeTab === 'request' ? t.type === 'incoming' : t.type === 'outgoing'
-  );
+  const filteredTransactions = transactions.filter((t) => t.type === 'outgoing');
 
   return (
     <div className="send-receive-screen">
-      <div className="tab-container">
-        <button
-          className={`tab ${activeTab === 'request' ? 'active' : ''}`}
-          onClick={() => setActiveTab('request')}
-        >
-          Запросить
-        </button>
-        <button
-          className={`tab ${activeTab === 'send' ? 'active' : ''}`}
-          onClick={() => setActiveTab('send')}
-        >
-          Отправить
-        </button>
-      </div>
 
       <div className="send-receive-content">
         <div className="input-section">
-          <div className="input-label">
-            {activeTab === 'request' ? 'Сумма для запроса' : 'Сумма для отправки'}
-          </div>
+          <div className="input-label">Сумма для отправки</div>
           <div className="input-container">
             <input
               className="input-field"
@@ -100,13 +76,11 @@ export const SendReceiveScreen: React.FC = () => {
         />
 
         <button className="generate-button" onClick={handleGenerateLink}>
-          {activeTab === 'request' ? 'Создать ссылку запроса' : 'Создать ссылку отправки'}
+          Создать ссылку отправки
         </button>
 
         <div className="history-section">
-          <div className="section-title">
-            {activeTab === 'request' ? 'Входящие транзакции' : 'Исходящие транзакции'}
-          </div>
+          <div className="section-title">Исходящие транзакции</div>
           <TransactionHistory transactions={filteredTransactions} />
         </div>
       </div>
