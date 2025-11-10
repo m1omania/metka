@@ -74,6 +74,19 @@ export const BalanceScreen: React.FC = () => {
 
   return (
     <div className="balance-screen">
+      <div className="balance-screen-content">
+        <BalanceDisplay balance={wallet.balance} promoBalance={wallet.promoBalance} />
+
+        <div className="input-container">
+          <div className="input-label">Сумма</div>
+          <div className="input-box">
+            <div className="input-text">
+              {amount || '0.00'} <span className="input-currency">USDT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="balance-screen-top">
         <DigitalKeyboard
           onPress={handleKeyPress}
@@ -94,17 +107,7 @@ export const BalanceScreen: React.FC = () => {
         </div>
       </div>
 
-      <div className="balance-screen-content">
-        <BalanceDisplay balance={wallet.balance} promoBalance={wallet.promoBalance} />
-
-        <div className="input-container">
-          <div className="input-label">Сумма</div>
-          <div className="input-box">
-            <div className="input-text">
-              {amount || '0.00'} <span className="input-currency">USDT</span>
-            </div>
-          </div>
-        </div>
+      <div className="balance-screen-bottom">
 
         <WalletAddress address={wallet.address} />
 

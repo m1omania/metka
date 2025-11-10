@@ -6,13 +6,17 @@
   padding-bottom: 80px;
 }
 
-.balance-screen-top {
-  background-color: #ffffff;
-  padding: 12px 0;
+.balance-screen-content {
+  padding: 16px 0;
   border-bottom: 1px solid #E5E5EA;
 }
 
-.balance-screen-content {
+.balance-screen-top {
+  background-color: #ffffff;
+  padding: 12px 0;
+}
+
+.balance-screen-bottom {
   flex: 1;
   padding-top: 16px;
 }
