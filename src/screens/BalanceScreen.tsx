@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Wallet, Transaction } from '../types';
 import { BalanceDisplay } from '../components/BalanceDisplay';
 import { WalletAddress } from '../components/WalletAddress';
@@ -27,10 +26,6 @@ export const BalanceScreen: React.FC = () => {
     setTransactions(transactionsData);
   };
 
-  const handleSend = () => {
-    navigate('/send');
-  };
-
   const handleReceive = () => {
     if (!wallet) return;
     alert('Показ адреса кошелька для получения средств');
@@ -41,10 +36,6 @@ export const BalanceScreen: React.FC = () => {
     const link = generateRequestLink();
     setLinkUrl(link.url);
     setShowLinkModal(true);
-  };
-
-  const handleDeposit = () => {
-    alert('Функция пополнения в разработке');
   };
 
   if (!wallet) {
@@ -61,17 +52,11 @@ export const BalanceScreen: React.FC = () => {
         <BalanceDisplay balance={wallet.balance} promoBalance={wallet.promoBalance} />
 
         <div className="balance-actions">
-          <button className="balance-action-button send-button" onClick={handleSend}>
-            Отправить
-          </button>
           <button className="balance-action-button receive-button" onClick={handleReceive}>
             Получить
           </button>
           <button className="balance-action-button qr-button" onClick={handleQR}>
             QR
-          </button>
-          <button className="balance-action-button deposit-button" onClick={handleDeposit}>
-            Пополнить
           </button>
         </div>
       </div>

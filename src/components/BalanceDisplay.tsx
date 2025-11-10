@@ -21,9 +21,6 @@ export const BalanceDisplay: React.FC<BalanceDisplayProps> = ({
     <div className="balance-display">
       <div className="balance-text">{formatBalance(balance)}</div>
       <div className="currency-text">USDT</div>
-      {promoBalance !== undefined && promoBalance > 0 && (
-        <div className="promo-balance-text">Промо: ${promoBalance}</div>
-      )}
     </div>
   );
 };
