@@ -11,9 +11,68 @@
   border-bottom: 1px solid #E5E5EA;
 }
 
+.balance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.header-icon-button {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.header-icon-button:hover {
+  background-color: #F5F5F7;
+}
+
+.header-avatar-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.header-avatar-button:hover {
+  transform: scale(1.05);
+}
+
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #007AFF;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.header-icon {
+  width: 24px;
+  height: 24px;
+  color: #000000;
+}
+
 .balance-actions {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   gap: 8px;
   padding: 0 16px;
   margin-top: 24px;
@@ -22,39 +81,68 @@
 
 .balance-action-button {
   flex: 1;
-  min-width: 80px;
-  padding: 12px 8px;
+  min-width: 70px;
+  padding: 16px 8px;
   border-radius: 12px;
   border: none;
-  font-size: 14px;
-  font-weight: 600;
+  background: none;
   cursor: pointer;
-  transition: opacity 0.2s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s, transform 0.1s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .balance-action-button:hover {
   opacity: 0.8;
+  transform: scale(0.98);
 }
 
-.send-button {
+.balance-action-icon-circle {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.deposit-button .balance-action-icon-circle {
   background-color: #007AFF;
+  border: none;
+  border-radius: 50%;
+}
+
+.withdraw-button .balance-action-icon-circle {
+  background-color: #007AFF;
+  border: none;
+  border-radius: 50%;
+}
+
+.receive-button .balance-action-icon-circle {
+  background-color: #007AFF;
+  border: none;
+  border-radius: 50%;
+}
+
+.send-button .balance-action-icon-circle {
+  background-color: #007AFF;
+  border: none;
+  border-radius: 50%;
+}
+
+.balance-action-icon {
+  width: 24px;
+  height: 24px;
   color: #ffffff;
 }
 
-.receive-button {
-  background-color: #34C759;
-  color: #ffffff;
-}
-
-.qr-button {
-  background-color: #FF9500;
-  color: #ffffff;
-}
-
-.deposit-button {
-  background-color: #5856D6;
-  color: #ffffff;
+.balance-action-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: #000000;
 }
 
 .balance-screen-top {
@@ -142,9 +230,6 @@
   background-color: #34C759;
 }
 
-.receive-button {
-  background-color: #FF9500;
-}
 
 .deposit-section,
 .withdraw-section {
@@ -166,7 +251,7 @@
   flex-wrap: wrap;
 }
 
-.deposit-button {
+.withdraw-option-button {
   flex: 1;
   min-width: 100px;
   padding: 12px 8px;
@@ -180,7 +265,7 @@
   text-align: center;
 }
 
-.deposit-button.disabled {
+.withdraw-option-button.disabled {
   opacity: 0.5;
 }
 

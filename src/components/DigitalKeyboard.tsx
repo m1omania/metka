@@ -1,16 +1,15 @@
 import React from 'react';
+import { BackspaceIcon } from '@heroicons/react/24/solid';
 import './DigitalKeyboard.css';
 
 interface DigitalKeyboardProps {
   onPress: (value: string) => void;
   onDelete: () => void;
-  onClear: () => void;
 }
 
 export const DigitalKeyboard: React.FC<DigitalKeyboardProps> = ({
   onPress,
   onDelete,
-  onClear,
 }) => {
   const numbers = [
     ['1', '2', '3'],
@@ -37,14 +36,15 @@ export const DigitalKeyboard: React.FC<DigitalKeyboardProps> = ({
               className={`keyboard-key ${num === '⌫' ? 'delete-key' : ''}`}
               onClick={() => handlePress(num)}
             >
-              {num}
+              {num === '⌫' ? (
+                <BackspaceIcon className="delete-icon" />
+              ) : (
+                num
+              )}
             </button>
           ))}
         </div>
       ))}
-      <button className="clear-button" onClick={onClear}>
-        Очистить
-      </button>
     </div>
   );
 };

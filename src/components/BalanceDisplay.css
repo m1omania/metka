@@ -5,6 +5,14 @@
   margin: 24px 0 16px;
 }
 
+.balance-label {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #8E8E93;
+  margin-bottom: 8px;
+}
+
 .balance-text {
   font-size: 36px;
   font-weight: 800;

@@ -19,6 +19,7 @@ export const BalanceDisplay: React.FC<BalanceDisplayProps> = ({
 
   return (
     <div className="balance-display">
+      <div className="balance-label">Ваш баланс</div>
       <div className="balance-text">{formatBalance(balance)}</div>
       <div className="currency-text">USDT</div>
     </div>

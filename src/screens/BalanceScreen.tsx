@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Wallet, Transaction } from '../types';
+import { QrCodeIcon, PlusIcon, ArrowDownIcon, ArrowUpIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline';
 import { BalanceDisplay } from '../components/BalanceDisplay';
 import { WalletAddress } from '../components/WalletAddress';
 import { TransactionHistory } from '../components/TransactionHistory';
@@ -14,6 +16,7 @@ export const BalanceScreen: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [showLinkModal, setShowLinkModal] = useState(false);
   const [linkUrl, setLinkUrl] = useState<string>('');
+  const [userInitial, setUserInitial] = useState<string>('А');
 
   useEffect(() => {
     loadData();
@@ -22,13 +25,29 @@ export const BalanceScreen: React.FC = () => {
   const loadData = async () => {
     const walletData = await WalletService.getWallet();
     const transactionsData = await WalletService.getTransactions();
+    const userData = await WalletService.getUser();
     setWallet(walletData);
     setTransactions(transactionsData);
+    
+    // Получаем первую букву из email или имени
+    const initial = userData.email?.charAt(0).toUpperCase() || 'А';
+    setUserInitial(initial);
+  };
+
+  const handleDeposit = () => {
+    alert('Функция в разработке');
+  };
+
+  const handleWithdraw = () => {
+    alert('Функция вывода в разработке');
   };
 
   const handleReceive = () => {
-    if (!wallet) return;
-    alert('Показ адреса кошелька для получения средств');
+    navigate('/send?tab=receive');
+  };
+
+  const handleSend = () => {
+    navigate('/send?tab=send');
   };
 
   const handleQR = () => {
@@ -49,50 +68,46 @@ export const BalanceScreen: React.FC = () => {
   return (
     <div className="balance-screen">
       <div className="balance-screen-content">
-        <BalanceDisplay balance={wallet.balance} promoBalance={wallet.promoBalance} />
+        <div className="balance-header">
+          <button className="header-avatar-button" onClick={() => alert('Профиль')}>
+            <div className="avatar-circle">{userInitial}</div>
+          </button>
+          <button className="header-icon-button" onClick={handleQR}>
+            <QrCodeIcon className="header-icon" />
+          </button>
+        </div>
+        <BalanceDisplay balance={wallet.balance} />
 
         <div className="balance-actions">
-          <button className="balance-action-button receive-button" onClick={handleReceive}>
-            Получить
+          <button className="balance-action-button deposit-button" onClick={handleDeposit}>
+            <div className="balance-action-icon-circle">
+              <PlusIcon className="balance-action-icon" />
+            </div>
+            <span className="balance-action-text">Пополнить</span>
           </button>
-          <button className="balance-action-button qr-button" onClick={handleQR}>
-            QR
+          <button className="balance-action-button withdraw-button" onClick={handleWithdraw}>
+            <div className="balance-action-icon-circle">
+              <ArrowDownIcon className="balance-action-icon" />
+            </div>
+            <span className="balance-action-text">Вывести</span>
+          </button>
+          <button className="balance-action-button receive-button" onClick={handleReceive}>
+            <div className="balance-action-icon-circle">
+              <ArrowUpIcon className="balance-action-icon" />
+            </div>
+            <span className="balance-action-text">Получить</span>
+          </button>
+          <button className="balance-action-button send-button" onClick={handleSend}>
+            <div className="balance-action-icon-circle">
+              <PaperAirplaneIcon className="balance-action-icon" />
+            </div>
+            <span className="balance-action-text">Отправить</span>
           </button>
         </div>
       </div>
 
       <div className="balance-screen-bottom">
         <WalletAddress address={wallet.address} />
-
-        <div className="deposit-section">
-          <div className="section-title">Пополнение</div>
-          <div className="deposit-buttons-row">
-            <button className="deposit-button disabled" disabled>
-              Банковская карта
-            </button>
-            <button className="deposit-button disabled" disabled>
-              CoinbasePay
-            </button>
-            <button className="deposit-button disabled" disabled>
-              CryptoWallet
-            </button>
-          </div>
-        </div>
-
-        <div className="withdraw-section">
-          <div className="section-title">Вывод</div>
-          <div className="deposit-buttons-row">
-            <button className="deposit-button disabled" disabled>
-              Банковская карта
-            </button>
-            <button className="deposit-button disabled" disabled>
-              Подарочная карта
-            </button>
-            <button className="deposit-button disabled" disabled>
-              Криптокошелек
-            </button>
-          </div>
-        </div>
 
         <TransactionHistory transactions={transactions} />
       </div>
